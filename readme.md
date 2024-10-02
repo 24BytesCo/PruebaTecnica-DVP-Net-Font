@@ -7,6 +7,22 @@ Este proyecto es una **aplicación de gestión de tareas** que utiliza **Angular
 
 ---
 
+
+## Despliegue en Firebase
+
+El frontend de la aplicación ha sido desplegado en Firebase y puede ser accedido en la siguiente URL:
+
+**URL de Firebase**: https://app-task-manager-firebase.web.app/
+
+### Usuarios configurados:
+
+- **Administrador**: dorado@yopmail.com / Contraseña: 4Mt0XvfT*
+- **Supervisor**: maria@yopmail.com / Contraseña: 4Mt0XvfT*
+- **Empleado**: yuli@yopmail.com / Contraseña: 4Mt0XvfT*
+
+
+---
+
 ## Requisitos Funcionales Implementados:
 
 1. **Autenticación de Usuarios**:
@@ -111,19 +127,7 @@ Para ejecutar este proyecto, necesitas instalar las siguientes herramientas:
 
 ---
 
-## Despliegue en Firebase
 
-El frontend de la aplicación ha sido desplegado en Firebase y puede ser accedido en la siguiente URL:
-
-**URL de Firebase**: https://app-task-manager-firebase.web.app/
-
-### Usuarios configurados:
-
-- **Administrador**: dorado@yopmail.com / Contraseña: 4Mt0XvfT*
-- **Supervisor**: maria@yopmail.com / Contraseña: 4Mt0XvfT*
-- **Empleado**: yuli@yopmail.com / Contraseña: 4Mt0XvfT*
-
----
 
 ## Consideraciones Especiales:
 
