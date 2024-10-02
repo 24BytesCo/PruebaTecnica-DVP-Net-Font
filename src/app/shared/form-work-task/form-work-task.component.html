@@ -1,0 +1,67 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Título tarea</label>
+    <input type="text" class="form-control" id="title" formControlName="title" placeholder="Título">
+    <!-- Agrega un mensaje de error si el título no es válido -->
+    <div *ngIf="taskForm.get('title').invalid && taskForm.get('title').touched" class="text-danger">
+      El título es requerido y debe tener un máximo de 50 caracteres.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Descripción tarea</label>
+    <textarea class="form-control" id="description" formControlName="description" rows="2"></textarea>
+    <div *ngIf="taskForm.get('description').invalid && taskForm.get('description').touched" class="text-danger">
+      La descripción es requerida y debe tener un máximo de 500 caracteres.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="assignedUser">Usuario asignado</label>
+    <select  class="form-control" id="assignedUser" formControlName="assignedUser">
+      <option *ngFor="let user of users" [value]="user.UserId">{{ user.FirstName +' '+ user.LastName }}</option>
+    </select>
+    <div *ngIf="taskForm.get('assignedUser').invalid && taskForm.get('assignedUser').touched" class="text-danger">
+      Debes asignar un usuario.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="taskStatus">Estado tarea</label>
+    <select class="form-control" id="taskStatus" formControlName="taskStatus">
+      <option *ngFor="let status of allTaskStates" [value]="status.TaskStateId">{{ status.TaskStateName }}</option>
+    </select>
+    <div *ngIf="taskForm.get('taskStatus').invalid && taskForm.get('taskStatus').touched" class="text-danger">
+      Debes seleccionar un estado.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="createdBy">{{ action === 'CREATE'? 'Usuario crea tarea':'Usuario creó tarea' }}</label>
+    <input disabled type="text" class="form-control" id="createdBy" formControlName="createdBy">
+  </div>
+<div class=" row justify-content-end">
+  <div class="col-md-7 text-right">
+    <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">{{ action === 'EDIT'? 'Modificar tarea': 'Crear tarea'  }}</button>
+    <button type="button" *ngIf=" action !== 'CREATE' && isUserAdmin" (click)="openDeleteModal()"  class="btn btn-danger ml-3">Eliminar tarea</button>
+  </div>
+</div>
+</form>
+
+
+<ng-template #confirmDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal Title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    ¿Seguro que desea eliminar la tarea?
+    
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onClickDeleteTask()">Si, eliminar</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cancelar</button>
+  </div>
+</ng-template>

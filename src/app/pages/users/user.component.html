@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
+      <nb-card class="cards-container">
+        <nb-card size="large" class="table-card">
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-6 mr-auto align-self-center">Administrador de tareas</div>
+              <div class="col-auto">
+                <button *ngIf="isUserAdmin" (click)="openNewModal()" style="width: 250px; height: 40px; font-size: 20px;" nbButton [status]="'primary'" hero>
+                  {{ 'Nuevo usuario' }}
+                </button>
+              </div>
+            </div>
+          </nb-card-header>
+  
+          <!-- Input de búsqueda -->
+          <div class="form-group row justify-content-center">
+            <input 
+              [(ngModel)]="searchQuery"
+              style="width: 40%; border-radius: 25px; margin-top: 20px; border: none; border-bottom: #b6c3e4 solid 2px;" 
+              type="text" 
+              class="form-control" 
+              placeholder="Buscar usuarios..." 
+              (ngModelChange)="onSearch(searchQuery)">
+          </div>
+          
+  
+          <!-- Contenedor de las tarjetas de tareas -->
+          <div class="row pl-5 pr-5 task-list-container">
+            <div (click)="openModal(statusCard)" class="col-xxxl-6 col-md-6 over-mouse" *ngFor="let statusCard of taskToShowInViewModel">
+              <ngx-status-card-task [state]="statusCard.state" [userAsigned]="statusCard.userAsigned" [title]="statusCard.title" [type]="statusCard.type">
+                <i [ngClass]="statusCard.iconClass"></i>
+              </ngx-status-card-task>
+            </div>
+          </div>
+  
+          <!-- Contenedor de los botones de paginación -->
+          <div class="row pagination-container">
+            <div class="col-md-6 mr-auto"></div>
+            <div class="col-auto text-end">
+              <button type="button" style="height: 20px; font-size: 12px; line-height: 0px; text-align: center; width: 150px;" class="btn btn-primary mr-3" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+              <span>Página {{currentPage}} de {{totalPages}}</span>
+              <button type="button" style="height: 20px; font-size: 12px; line-height: 0px; text-align: center;  width: 150px;" class="btn btn-primary ml-3" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+            </div>
+          </div>
+        </nb-card>
+      </nb-card>
+    </div>
+  </div>
+  
+  <!-- Botón "Nueva Tarea" fijo -->
+  <div class="row">
+    <div class="col-md-6 mr-auto"></div>
+    <div class="col-auto text-end">
+      <button *ngIf="isUserAdmin" (click)="openNewModal()" style="width: 250px; height: 40px; font-size: 20px;" nbButton [status]="'primary'" hero>
+        {{ 'Nuevo usuario' }}
+      </button>
+    </div>
+  </div>
+  
+  
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ actionSelected === 'CREATE' ? 'Crear Usuario' : 'Modificar Usuario' }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+  
+      <!-- <ngx-app-form-work-task (closeModal)="onCloseModal($event)" (reloadTask)="reloadTask($event)" [users]="users"
+        [allTaskStates]="allTaskStates" [action]="actionSelected" [workTaskData]="workTaskSelected">
+      </ngx-app-form-work-task> -->
+
+      <ngx-form-user
+      (closeModal)="onCloseModal($event)" [allRoles]="allRoles" (reloadTask)="reloadTask($event)" [users] = "users" [usersSelected]="usersSelected"
+        [allTaskStates]="allTaskStates" [action]="actionSelected" 
+      ></ngx-form-user>
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

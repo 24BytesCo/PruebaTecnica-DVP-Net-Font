@@ -1,0 +1,70 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firsName">Primer nombre</label>
+      <input type="text" class="form-control" id="firsName" formControlName="firsName" placeholder="Primer nombre">
+      <!-- Agrega un mensaje de error si el título no es válido -->
+      <div *ngIf="userForm.get('firsName').invalid && userForm.get('firsName').touched" class="text-danger">
+        El primer nombre es requerido y debe tener un máximo de 50 caracteres.
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Segundo nombre</label>
+        <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Segundo nombre">
+      </div>
+  
+      <div class="form-group">
+        <label for="emailUser">Email</label>
+        <input type="email" class="form-control" id="emailUser" formControlName="emailUser" placeholder="Email">
+        <!-- Agrega un mensaje de error si el título no es válido -->
+        <div *ngIf="userForm.get('emailUser').invalid && userForm.get('emailUser').touched" class="text-danger">
+            El primer nombre es requerido y debe ser email válido
+        </div>
+      </div>
+  
+      <div class="form-group" *ngIf="action === 'CREATE'">
+        <label for="password">Password</label>
+        <input type="text" class="form-control" id="password" formControlName="password" placeholder="Password">
+        <!-- Agrega un mensaje de error si el título no es válido -->
+        <div *ngIf="userForm.get('password').invalid && userForm.get('password').touched" class="text-danger">
+          la contraseña es requerida y debe tener un máximo de 50 caracteres.
+        </div>
+      </div>
+
+
+
+    <div class="form-group">
+      <label for="roleUser">Rol</label>
+      <select  class="form-control" id="roleUser" formControlName="roleUser">
+        <option *ngFor="let role of allRoles" [value]="role.Id">{{ role.Name }}</option>
+      </select>
+      <div *ngIf="userForm.get('roleUser').invalid && userForm.get('roleUser').touched" class="text-danger">
+        Debes asignar un rol.
+      </div>
+    </div>
+  
+  <div class=" row justify-content-end">
+    <div class="col-md-7 text-right">
+      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">{{ action === 'EDIT'? 'Modificar usuario': 'Crear usuario'  }}</button>
+      <button type="button" *ngIf=" action !== 'CREATE' && isUserAdmin" (click)="openDeleteModal()"  class="btn btn-danger ml-3">Eliminar usuario</button>
+    </div>
+  </div>
+  </form>
+  
+  
+  <ng-template #confirmDelete let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Eliminar usuario</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+  
+      ¿Seguro que desea eliminar el usuario?
+      Se eliminarán las tareas asignadas al usuario
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="onClickDeleteUser()">Si, eliminar</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cancelar</button>
+    </div>
+  </ng-template>
