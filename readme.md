@@ -35,7 +35,6 @@ Este proyecto es una **aplicación de gestión de tareas** que utiliza **Angular
 
 ---
 
-
 ### Backend (.NET Core):
 
 - **ASP.NET Core** como framework para el backend.
@@ -73,7 +72,6 @@ Para ejecutar este proyecto, necesitas instalar las siguientes herramientas:
    git clone <repo-url>
    cd <repo-folder>
    ```
-
 
 3. **Frontend**:
 
@@ -113,6 +111,20 @@ Para ejecutar este proyecto, necesitas instalar las siguientes herramientas:
 
 ---
 
+## Despliegue en Firebase
+
+El frontend de la aplicación ha sido desplegado en Firebase y puede ser accedido en la siguiente URL:
+
+**URL de Firebase**: https://app-task-manager-firebase.web.app/
+
+### Usuarios configurados:
+
+- **Administrador**: dorado@yopmail.com / Contraseña: 4Mt0XvfT*
+- **Supervisor**: maria@yopmail.com / Contraseña: 4Mt0XvfT*
+- **Empleado**: yuli@yopmail.com / Contraseña: 4Mt0XvfT*
+
+---
+
 ## Consideraciones Especiales:
 
 - **Cifrado de Sesión**: Todos los datos almacenados en el **Session Storage** están cifrados para garantizar la seguridad de la información sensible.
@@ -120,9 +132,5 @@ Para ejecutar este proyecto, necesitas instalar las siguientes herramientas:
 
 ---
 
-
 - **Paginación y Búsqueda**: Se ha implementado la paginación en la gestión de tareas para mejorar la experiencia de usuario y permitir búsquedas dinámicas.
 - **Seguridad**: Las rutas del backend están protegidas mediante JWT, y el acceso a las diferentes funcionalidades está determinado por los roles del usuario.
-
-
-
