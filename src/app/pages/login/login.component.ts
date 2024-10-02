@@ -26,7 +26,6 @@ export class LoginComponent {
         .subscribe((response) => {
           if (response.isSuccessful) {
             this._userService.setUser(response.data)
-            console.log("response", response);
             
             // Redirige al dashboard después del login exitoso
             this._router.navigate(["/dashboard"]);

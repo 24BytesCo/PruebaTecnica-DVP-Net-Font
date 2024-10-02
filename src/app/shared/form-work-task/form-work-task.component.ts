@@ -145,7 +145,6 @@ export class FormWorkTaskComponent implements OnInit {
 
   onSubmit() {
     if (this.taskForm.valid && this.action === TypeAction.Create) {
-      console.log(this.taskForm.value);
       const createWorkTaskRequest: CreateWorkTaskRequest = {
         name: this.taskForm.get("title").value,
         description: this.taskForm.get("description").value,
@@ -159,7 +158,6 @@ export class FormWorkTaskComponent implements OnInit {
             this.closeModal.emit(true);
             this.reloadTask.emit(true);
           }
-          console.log("response create", response);
         });
     } else if (this.taskForm.valid && this.action === TypeAction.Edit) {
       if (this.isUserSupervisor || this.isUserAdmin) {
@@ -169,7 +167,6 @@ export class FormWorkTaskComponent implements OnInit {
       }
     }
     {
-      console.log("Formulario no válido");
     }
   }
 
@@ -188,7 +185,6 @@ export class FormWorkTaskComponent implements OnInit {
           this.closeModal.emit(true);
           this.reloadTask.emit(true);
         }
-        console.log("response edit", response);
       });
   }
 
@@ -207,7 +203,6 @@ export class FormWorkTaskComponent implements OnInit {
           this.closeModal.emit(true);
           this.reloadTask.emit(true);
         }
-        console.log("response edit", response);
       });
   }
 

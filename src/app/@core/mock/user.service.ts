@@ -24,13 +24,11 @@ export class UserService {
 
   // Método para guardar los datos del usuario encriptados en sessionStorage
   setUser(userData: UserModel) {
-    console.log("userData 000", userData);
 
     const encryptedData = this.encryptData(userData);
     sessionStorage.setItem(this.userKey, encryptedData);
 
     this.user = userData;
-    console.log("encryptedData", encryptedData);
   }
 
   // Método para obtener los datos del usuario desencriptados

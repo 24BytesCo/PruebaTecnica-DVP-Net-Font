@@ -81,7 +81,6 @@ export class UserComponent implements OnInit {
 
     this._rolesService.getAllRoles().subscribe(response =>
       {
-        console.log("response roles", response);
         if (response.isSuccessful) {
           this.allRoles = response.data;
         }
@@ -91,7 +90,6 @@ export class UserComponent implements OnInit {
   }
 
   validateActions() {
-    console.log("this.searchQuery", this.searchQuery);
 
     if (this.searchQuery && this.searchQuery != "") {
       this.searchTasksDynamic(this.searchQuery);
@@ -102,7 +100,6 @@ export class UserComponent implements OnInit {
 
   transformDataFromAllUsers(allUsers: UserReducerResponseDto[]) {
     this.taskToShowInViewModel = [];
-    console.log("allUsersallUsersallUsers", allUsers);
     
     allUsers.forEach((user) => {
       let taskForWiev: TaskToShowInViewModel = {
@@ -120,7 +117,6 @@ export class UserComponent implements OnInit {
   onSubmit() {}
 
   openModal(event: TaskToShowInViewModel) {
-    console.log("event", event);
     this.actionSelected = TypeAction.Edit;
     this.usersSelected = this.users.find(
       (r) => r.UserId == event.taskId
@@ -141,7 +137,6 @@ export class UserComponent implements OnInit {
   }
 
   reloadTask(event: boolean) {
-    console.log("reload", event);
 
     if (event) {
       this.validateActions();
@@ -157,11 +152,9 @@ export class UserComponent implements OnInit {
   }
 
   onSearch(event: any) {
-    console.log("event", event);
 
     if (event && event.length > 2) {
       this.searchTasksDynamic(event);
-      console.log("Buscando");
     } else if (event == "") {
       this.currentPage = 1;
       this.validateActions();
@@ -178,7 +171,6 @@ export class UserComponent implements OnInit {
           this.transformDataFromAllUsers(this.users);
         }
 
-        console.log("response filter", response);
       });
   }
 }

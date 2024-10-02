@@ -89,14 +89,11 @@ export class DashboardComponent implements OnInit {
     this._taskStateService.allTaskState().subscribe((response) => {
       if (response.isSuccessful) {
         this.allTaskStates = [...response.data];
-        console.log("this.allTaskStates", this.allTaskStates);
       }
     });
   }
 
   validateActions() {
-    console.log("this.searchQuery", this.searchQuery);
-
     if (this.isUserEmployed) {
       this.getAllMyWorkTask();
     } else {
@@ -117,12 +114,7 @@ export class DashboardComponent implements OnInit {
         if (response.isSuccessful) {
           this.allWorkTask = [];
           this.allWorkTask = [...response.data];
-          console.log("allMyWorkTask", this.allWorkTask);
           this.totalPages = Math.ceil(response.totalCount / this.pageSize); // Total de páginas
-          console.log("pageSize", this.pageSize);
-          console.log("response.totalCount", response.totalCount);
-          console.log("totalPages", this.totalPages);
-
           this.transformDataFromAlltasks(this.allWorkTask);
         }
       });
@@ -133,13 +125,9 @@ export class DashboardComponent implements OnInit {
       .getAllMyWorkTask(this.currentPage, this.pageSize)
       .subscribe((response) => {
         if (response.isSuccessful) {
-          console.log("allTask", response);
           this.allWorkTask = response.data;
-          console.log("allWorkTask", this.allWorkTask);
 
           this.totalPages = Math.ceil(response.totalCount / this.pageSize); // Total de páginas
-
-console.log("totalPages", this.totalPages);
 
           this.transformDataFromAlltasks(this.allWorkTask);
         }
@@ -181,13 +169,10 @@ console.log("totalPages", this.totalPages);
   onSubmit() {}
 
   openModal(event: TaskToShowInViewModel) {
-    console.log("event", event);
     this.actionSelected = TypeAction.Edit;
     this.workTaskSelected = this.allWorkTask.find(
       (r) => r.WorkTaskId == event.taskId
     );
-    console.log("workTaskSelected 00", this.workTaskSelected);
-    console.log("allTaskStates", this.allTaskStates);
     setTimeout(() => {
       this.modalService.open(this.content, { size: "lg" });
     }, 0); // Retraso mínimo
@@ -196,7 +181,6 @@ console.log("totalPages", this.totalPages);
   openNewModal() {
     this.actionSelected = TypeAction.Create;
     this.workTaskSelected = null;
-    console.log("workTaskSelected 00", this.workTaskSelected);
 
     this.modalService.open(this.content, { size: "lg" });
   }
@@ -208,8 +192,6 @@ console.log("totalPages", this.totalPages);
   }
 
   reloadTask(event: boolean) {
-    console.log("reload", event);
-
     if (event) {
       this.validateActions();
     }
@@ -223,11 +205,9 @@ console.log("totalPages", this.totalPages);
   }
 
   onSearch(event: any) {
-    console.log("event", event);
 
     if (event && event.length > 2) {
       this.searchTasksDynamic(event);
-      console.log("Buscando");
     } else if (event == '') {
       this.currentPage = 1;
       this.validateActions();
@@ -244,7 +224,6 @@ console.log("totalPages", this.totalPages);
           this.transformDataFromAlltasks(this.allWorkTask);
         }
 
-        console.log("response filter", response);
       });
   }
 }

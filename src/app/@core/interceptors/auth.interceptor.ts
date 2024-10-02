@@ -50,7 +50,6 @@ export class ApiInterceptor implements HttpInterceptor {
         if (body?.data && this.encryptionEnabled) {
           // Intentamos desencriptar los datos
           body.data = this._decryptService.getUserInfoFromToken(body.data);
-          console.log("Datos desencriptados:", body.data);
         }
 
         // Si la respuesta contiene un objeto `GenericResponse` y es exitosa, mostramos un mensaje

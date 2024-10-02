@@ -124,7 +124,6 @@ export class FormUserComponent implements OnInit {
       this.updateUser();
     }
     {
-      console.log("Formulario no válido");
     }
   }
 
@@ -144,7 +143,6 @@ export class FormUserComponent implements OnInit {
           this.closeModal.emit(true);
           this.reloadTask.emit(true);
         }
-        console.log("response create user", response);
       });
   }
 
@@ -161,7 +159,6 @@ export class FormUserComponent implements OnInit {
         this.closeModal.emit(true);
         this.reloadTask.emit(true);
       }
-      console.log("response edit user", response);
     });
   }
 
